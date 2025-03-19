@@ -6,13 +6,14 @@ import { movies } from "@/lib/data";
 import CodeExample from "@/components/code-example";
 import SiteHeader from "@/components/site-header";
 
-interface MoviePageProps {
-  params: { id: string };
-  searchParams?: Record<string, string | string[] | undefined>; // Optional for query parameters
-}
+type MoviePageProps = {
+  params: Promise<{ id: string }>;
+};
 
-export default function MoviePage({ params }: MoviePageProps) {
-  const movieId = Number.parseInt(params.id, 10);
+export default async function MoviePage({ params }: MoviePageProps) {
+  const { id } = await params;
+  const movieId = Number.parseInt(id, 10);
+
   const movie = movies.find((m) => m.id === movieId);
 
   if (!movie) {
