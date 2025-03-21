@@ -1,10 +1,12 @@
 "use client";
 
 import type React from "react";
-
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Play, Copy, Check, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Prism from "prismjs";
+import "prismjs/themes/prism-okaidia.css";
+import "prismjs/components/prism-javascript";
 import { Textarea } from "./ui/textarea";
 
 interface CodeEditorProps {
@@ -17,7 +19,17 @@ export default function CodeEditor({ initialCode, onCheck }: CodeEditorProps) {
   const [output, setOutput] = useState("");
   const [copied, setCopied] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const outputRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const codeDisplayRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    // Highlight the code when it changes or when not in editing mode
+    if (!isEditing) {
+      Prism.highlightAll();
+    }
+  }, [code, isEditing]);
 
   const runCode = () => {
     setIsRunning(true);
@@ -102,12 +114,30 @@ export default function CodeEditor({ initialCode, onCheck }: CodeEditorProps) {
     }
   };
 
+  const toggleEditing = () => {
+    setIsEditing(!isEditing);
+    // Focus the textarea when switching to editing mode
+    if (!isEditing && textareaRef.current) {
+      setTimeout(() => {
+        textareaRef.current?.focus();
+      }, 0);
+    }
+  };
+
   return (
     <div className="space-y-4">
       <div className="bg-gray-950 rounded-lg overflow-hidden border border-gray-800">
         <div className="flex justify-between items-center px-4 py-2 bg-gray-900 border-b border-gray-800">
           <span className="text-sm font-mono text-gray-400">JavaScript</span>
           <div className="flex space-x-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleEditing}
+              className="h-8 px-2 text-gray-400 hover:text-white"
+            >
+              {isEditing ? "View" : "Edit"}
+            </Button>
             <Button
               variant="ghost"
               size="sm"
@@ -130,17 +160,36 @@ export default function CodeEditor({ initialCode, onCheck }: CodeEditorProps) {
             </Button>
           </div>
         </div>
-        <Textarea
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          onKeyDown={handleKeyDown}
-          className="w-full h-64 bg-gray-950 text-white font-mono p-4 focus:outline-none resize-none"
-          spellCheck="false"
-          style={{
-            color: "rgb(209, 213, 219)", // text-gray-300
-            caretColor: "white",
-          }}
-        />
+
+        {isEditing ? (
+          <Textarea
+            ref={textareaRef}
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            onKeyDown={handleKeyDown}
+            className="w-full h-64 bg-gray-950 text-white font-mono p-4 focus:outline-none resize-none"
+            spellCheck="false"
+            style={{
+              color: "rgb(209, 213, 219)", // text-gray-300
+              caretColor: "white",
+            }}
+          />
+        ) : (
+          <div className="relative w-full h-64 overflow-auto">
+            <pre className="p-4 h-full">
+              <code ref={codeDisplayRef} className="language-javascript">
+                {code}
+              </code>
+            </pre>
+            <div
+              className="absolute top-2 right-2 p-1 bg-gray-800 rounded opacity-50 hover:opacity-100 cursor-pointer"
+              onClick={toggleEditing}
+              title="Click to edit"
+            >
+              <span className="text-xs text-gray-300">Click to edit</span>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="flex space-x-4">

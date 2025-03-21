@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import CodeExample from "@/components/code-example";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import InteractiveExercise from "@/components/interactive-exercise";
+import SyntaxHighlighter from "@/components/syntax-highlighter";
 
 export default function DataTypesPage() {
   return (
@@ -330,9 +331,7 @@ console.log("Total score from all ratings: " + totalScore);`}
                     Basic data types that store simple values.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>
-                      string, number, boolean, bigint, symbol, undefined, null
-                    </code>
+                    <SyntaxHighlighter code="string, number, boolean, bigint, symbol, undefined, null" />
                   </pre>
                 </div>
 
@@ -344,7 +343,7 @@ console.log("Total score from all ratings: " + totalScore);`}
                     Complex data types that store references.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>object, array, function, date, map, set</code>
+                    <SyntaxHighlighter code="object, array, function, date, map, set" />
                   </pre>
                 </div>
 
@@ -356,9 +355,11 @@ console.log("Total score from all ratings: " + totalScore);`}
                     Ways to check data types in JavaScript.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>{`typeof value
+                    <SyntaxHighlighter
+                      code={`typeof value
 Array.isArray(value)
-value instanceof Constructor`}</code>
+value instanceof Constructor`}
+                    />
                   </pre>
                 </div>
 

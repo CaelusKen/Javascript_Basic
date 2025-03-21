@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import CodeExample from "@/components/code-example";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import InteractiveExercise from "@/components/interactive-exercise";
+import SyntaxHighlighter from "@/components/syntax-highlighter";
 
 export default function VariablesPage() {
   return (
@@ -307,7 +308,10 @@ console.log("Is rating valid?", validateRating(4.8));
                     scope.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>let title = &quot;Movie&quot; ;</code>
+                    <SyntaxHighlighter
+                      code='let title = "Movie" ;'
+                      language="javascript"
+                    />
                   </pre>
                 </div>
 
@@ -317,7 +321,7 @@ console.log("Is rating valid?", validateRating(4.8));
                     Block-scoped, cannot be updated or redeclared.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>const ID = 123;</code>
+                    <SyntaxHighlighter code="const ID = 123;" />
                   </pre>
                 </div>
 
@@ -327,7 +331,7 @@ console.log("Is rating valid?", validateRating(4.8));
                     Function-scoped, can be updated and redeclared.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>var count = 0;</code>
+                    <SyntaxHighlighter code="var count = 0;" />
                   </pre>
                 </div>
 

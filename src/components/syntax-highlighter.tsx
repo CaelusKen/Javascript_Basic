@@ -1,10 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import Prism from "prismjs";
+import "prismjs/themes/prism-okaidia.css";
+import "prismjs/components/prism-javascript";
 
 interface SyntaxHighlighterProps {
   code: string;
@@ -23,37 +25,9 @@ export default function SyntaxHighlighter({
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // Add CSS classes to different parts of the code
-  const colorizeCode = () => {
-    // This is a simple colorization that doesn't use regex
-    // It just adds some basic color to make the code more readable
-    return code
-      .split("\n")
-      .map((line, i) => {
-        // Add some basic color to keywords
-        const coloredLine = line
-          .replace(
-            /\b(const|let|var|function|return|if|else|for|while)\b/g,
-            '<span style="color: #c678dd;">$1</span>'
-          )
-          .replace(
-            /\b(true|false|null|undefined)\b/g,
-            '<span style="color: #d19a66;">$1</span>'
-          )
-          .replace(
-            /\b(\d+(\.\d+)?)\b/g,
-            '<span style="color: #d19a66;">$1</span>'
-          )
-          .replace(
-            /(["'`])(.*?)\1/g,
-            '<span style="color: #98c379;">$1$2$1</span>'
-          )
-          .replace(/\/\/(.*)/g, '<span style="color: #7f848e;">//$1</span>');
-
-        return `<span>${coloredLine}</span>`;
-      })
-      .join("\n");
-  };
+  useEffect(() => {
+    Prism.highlightAll(); // Highlight the code after it is rendered
+  }, [code]);
 
   return (
     <Card className="bg-gray-950 border-gray-800 overflow-hidden">
@@ -75,7 +49,7 @@ export default function SyntaxHighlighter({
         </Button>
       </div>
       <pre className="p-4 overflow-x-auto text-sm font-mono">
-        <code dangerouslySetInnerHTML={{ __html: colorizeCode() }} />
+        <code className={`language-${language}`}>{code}</code>
       </pre>
     </Card>
   );

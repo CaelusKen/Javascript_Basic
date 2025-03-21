@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import CodeExample from "@/components/code-example";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import InteractiveExercise from "@/components/interactive-exercise";
+import SyntaxHighlighter from "@/components/syntax-highlighter";
 
 export default function DataStructuresPage() {
   return (
@@ -578,7 +579,8 @@ console.log(getMoviesByYear(2023)); // Should return movies from 2023`}
                     Ordered collections of values.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>{`// Creation
+                    <SyntaxHighlighter
+                      code={`// Creation
 const arr = [1, 2, 3];
 
 // Methods
@@ -586,7 +588,8 @@ arr.push(4);     // Add to end
 arr.pop();       // Remove from end
 arr.unshift(0);  // Add to start
 arr.shift();     // Remove from start
-arr.splice(1, 1, 'new'); // Replace`}</code>
+arr.splice(1, 1, 'new'); // Replace`}
+                    />
                   </pre>
                 </div>
 
@@ -596,7 +599,8 @@ arr.splice(1, 1, 'new'); // Replace`}</code>
                     Collections of key-value pairs.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>{`// Creation
+                    <SyntaxHighlighter
+                      code={`// Creation
 const obj = { key: 'value' };
 
 // Access
@@ -606,7 +610,8 @@ obj['key'];      // Bracket notation
 // Methods
 Object.keys(obj);    // Get keys
 Object.values(obj);  // Get values
-Object.entries(obj); // Get pairs`}</code>
+Object.entries(obj); // Get pairs`}
+                    />
                   </pre>
                 </div>
 
@@ -616,7 +621,8 @@ Object.entries(obj); // Get pairs`}</code>
                     ES6 collections with special features.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>{`// Map
+                    <SyntaxHighlighter
+                      code={`// Map
 const map = new Map();
 map.set(key, value);  // Add entry
 map.get(key);         // Get value
@@ -627,7 +633,8 @@ map.delete(key);      // Remove entry
 const set = new Set();
 set.add(value);       // Add value
 set.has(value);       // Check value
-set.delete(value);    // Remove value`}</code>
+set.delete(value);    // Remove value`}
+                    />
                   </pre>
                 </div>
 
@@ -639,13 +646,15 @@ set.delete(value);    // Remove value`}</code>
                     Powerful methods for data manipulation.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>{`arr.map(fn)      // Transform
+                    <SyntaxHighlighter
+                      code={`arr.map(fn)      // Transform
 arr.filter(fn)   // Filter
 arr.find(fn)     // Find first
 arr.reduce(fn)   // Reduce to value
 arr.sort(fn)     // Sort
 arr.some(fn)     // Any match?
-arr.every(fn)    // All match?`}</code>
+arr.every(fn)    // All match?`}
+                    />
                   </pre>
                 </div>
 

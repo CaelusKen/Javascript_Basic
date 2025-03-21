@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import CodeExample from "@/components/code-example";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import InteractiveExercise from "@/components/interactive-exercise";
+import SyntaxHighlighter from "@/components/syntax-highlighter";
 
 export default function ConditionsPage() {
   return (
@@ -509,11 +510,13 @@ console.log("Ticket price: $" + ticketPrice);`}
                     Basic conditional structure in JavaScript.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>{`if (condition) {
+                    <SyntaxHighlighter
+                      code={`if (condition) {
   // code if true
 } else {
   // code if false
-}`}</code>
+}`}
+                    />
                   </pre>
                 </div>
 
@@ -523,7 +526,8 @@ console.log("Ticket price: $" + ticketPrice);`}
                     Evaluates an expression against multiple cases.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>{`switch (expression) {
+                    <SyntaxHighlighter
+                      code={`switch (expression) {
   case value1:
     // code
     break;
@@ -532,7 +536,8 @@ console.log("Ticket price: $" + ticketPrice);`}
     break;
   default:
     // code
-}`}</code>
+}`}
+                    />
                   </pre>
                 </div>
 
@@ -544,7 +549,9 @@ console.log("Ticket price: $" + ticketPrice);`}
                     Shorthand for simple if...else statements.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>{`condition ? valueIfTrue : valueIfFalse`}</code>
+                    <SyntaxHighlighter
+                      code={`condition ? valueIfTrue : valueIfFalse`}
+                    />
                   </pre>
                 </div>
 
@@ -556,10 +563,12 @@ console.log("Ticket price: $" + ticketPrice);`}
                     Combine or negate conditions.
                   </p>
                   <pre className="bg-gray-950 p-2 rounded text-xs mt-1">
-                    <code>{`&& // AND
+                    <SyntaxHighlighter
+                      code={`&& // AND
 || // OR
 !  // NOT
-?? // Nullish coalescing`}</code>
+?? // Nullish coalescing`}
+                    />
                   </pre>
                 </div>
 
